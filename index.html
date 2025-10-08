@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>単語クイズ</title>
+  <title>英検準一級単語クイズ</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/wanakana/wanakana.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,7 +65,7 @@
       color: var(--white);
       text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
     }
-    #start-screen, .quiz-container {
+    .quiz-container {
       max-width: 800px;
       margin: 40px auto;
       padding: 40px;
@@ -76,28 +76,6 @@
     }
     .animate-in { animation: fadeInUp 0.5s 0.1s ease-out forwards; }
     .feedback-animate { animation: popIn 0.4s ease-out forwards; }
-    #start-screen h1 {
-      font-size: 32px;
-      font-weight: 900;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #start-screen p { font-size: 18px; color: var(--dark-text); margin-bottom: 30px; }
-    #username {
-      padding: 12px 15px;
-      font-size: 18px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      width: 300px;
-      border: 2px solid var(--duo-gray-border);
-      border-radius: 12px;
-      display: block;
-      margin: 0 auto 20px;
-      transition: all 0.2s ease;
-    }
-    #username:focus { outline: none; border-color: var(--duo-blue); }
     .quiz-container { width: 100%; min-height: 550px; box-sizing: border-box; }
     .input-field {
       margin: 10px;
@@ -133,18 +111,7 @@
     #header-buttons-container { display: flex; flex-direction: column; align-items: flex-end; }
     #header-buttons-container div { margin-bottom: 5px; }
     #header-buttons-container div:last-child { margin-bottom: 0; }
-    /* Make history button always visible */
     #toggleHistoryBtn { display: inline-block; }
-    .circle-button {
-      width: 36px;
-      height: 36px;
-      padding: 0;
-      border-radius: 50%;
-      margin-left: 8px;
-      font-size: 16px;
-      border-bottom: 2px solid var(--duo-green-dark);
-    }
-    .circle-button:active { top: 1px; border-bottom-width: 1px; }
     .hidden { display: none; }
     #question { font-size: 28px; font-weight: 900; margin-bottom: 15px; }
     #translation { font-size: 18px; margin-top: 20px; line-height: 1.6; }
@@ -276,7 +243,7 @@
 </head>
 <body>
   <header>
-    <div id="title">Vocabulary Quiz</div>
+    <div id="title">Eiken Pre-1 Vocabulary Quiz</div>
     <div id="header-buttons-container">
       <div id="top-row-buttons">
         <button class="button btn-blue" id="toggleHistoryBtn">履歴</button>
@@ -387,7 +354,6 @@
     let keyupLock = false;
     let titleClickCount = 0;
     let titleClickTimer = null;
-    let englishVoices = [];
 
     const header = document.querySelector("header");
     const quizContainer = document.querySelector(".quiz-container");
@@ -531,11 +497,15 @@
       q.answers.forEach(ans => {
         highlighted = highlighted.replace(new RegExp(`\\b${ans}\\b`, "gi"), `<span style="font-weight: 900; color: red;">${ans}</span>`);
       });
+
+      /* ▼▼▼ [変更] 音声再生ボタンを削除 ▼▼▼ */
       translationEl.innerHTML = `
-        <p><b>正解の文章:</b> ${highlighted} <button class="button circle-button btn-green" onclick="speak('${q.translation.replace(/"/g, '')}')">🔊</button></p>
-        <p><b>答え:</b> ${q.answers.join(", ")} ${q.answers.map(ans => `<button class="button circle-button btn-green" onclick="speak('${ans}')">🔊</button>`).join(" ")}</p>
+        <p><b>正解の文章:</b> ${highlighted}</p>
+        <p><b>答え:</b> ${q.answers.join(", ")}</p>
         <p><b>答えの意味:</b> ${q.blanksTranslation.join(", ")}</p>
       `;
+      /* ▲▲▲ ▲▲▲ */
+
       const isLastQuestion = index === questions.length - 1;
       prevBtn.classList.toggle("hidden", index <= 0);
       showAllBtn.classList.toggle("hidden", !(isLastQuestion && current === lastAnsweredIndex));
@@ -661,32 +631,10 @@
         [array[i], array[j]] = [array[j], array[i]];
       }
     }
-
-    function loadVoices() {
-      englishVoices = speechSynthesis.getVoices().filter(voice => voice.lang.startsWith('en-'));
-    }
-
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = loadVoices;
-    }
-    loadVoices();
-
-    function speak(text) {
-      if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
-      }
-      setTimeout(() => {
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = "en-US";
-        if (englishVoices.length > 0) {
-          let selectedVoice = englishVoices.find(v => v.lang === "en-US" && v.name.includes("Female")) ||
-                              englishVoices.find(v => v.lang === "en-US") ||
-                              englishVoices[0];
-          u.voice = selectedVoice;
-        }
-        speechSynthesis.speak(u);
-      }, 50);
-    }
+    
+    /* ▼▼▼ [削除] 音声再生機能を削除 ▼▼▼ */
+    // All voice and speak related functions have been removed.
+    /* ▲▲▲ ▲▲▲ */
 
     // PDF functions are omitted for brevity...
     function downloadPDF(){}
@@ -705,7 +653,6 @@
     downloadAllBtn.onclick = downloadAllQuestionsPDF;
     backToStartBtn.onclick = restartQuiz;
 
-    /* ▼▼▼ [変更] パスワードチェックを削除 ▼▼▼ */
     toggleHistoryBtn.addEventListener('click', () => {
       historyContainer.classList.toggle('show');
     });
@@ -720,7 +667,6 @@
         alert('履歴を削除しました。');
       }
     });
-    /* ▲▲▲ ▲▲▲ */
 
     function secretClickHandler() {
       titleClickCount++;
@@ -743,13 +689,10 @@
       else if (!showAllBtn.classList.contains('hidden')) { showAllResults(); }
     });
     
-    /* ▼▼▼ [変更] ページ読み込み時の処理を修正 ▼▼▼ */
     document.addEventListener('DOMContentLoaded', () => {
       displayPlayHistory();
-      // クイズを自動的に開始
       initQuiz();
     });
-    /* ▲▲▲ ▲▲▲ */
 
     historySearchInput.addEventListener('input', () => {
       displayPlayHistory(historySearchInput.value);
