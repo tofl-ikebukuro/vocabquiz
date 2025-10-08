@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>英検準一級単語クイズ</title>
+  <title>単語クイズ</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/wanakana/wanakana.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -243,7 +243,7 @@
 </head>
 <body>
   <header>
-    <div id="title">Eiken Pre-1 Vocabulary Quiz</div>
+    <div id="title">Vocabulary Quiz</div>
     <div id="header-buttons-container">
       <div id="top-row-buttons">
         <button class="button btn-blue" id="toggleHistoryBtn">履歴</button>
@@ -498,13 +498,11 @@
         highlighted = highlighted.replace(new RegExp(`\\b${ans}\\b`, "gi"), `<span style="font-weight: 900; color: red;">${ans}</span>`);
       });
 
-      /* ▼▼▼ [変更] 音声再生ボタンを削除 ▼▼▼ */
       translationEl.innerHTML = `
         <p><b>正解の文章:</b> ${highlighted}</p>
         <p><b>答え:</b> ${q.answers.join(", ")}</p>
         <p><b>答えの意味:</b> ${q.blanksTranslation.join(", ")}</p>
       `;
-      /* ▲▲▲ ▲▲▲ */
 
       const isLastQuestion = index === questions.length - 1;
       prevBtn.classList.toggle("hidden", index <= 0);
@@ -632,16 +630,110 @@
       }
     }
     
-    /* ▼▼▼ [削除] 音声再生機能を削除 ▼▼▼ */
-    // All voice and speak related functions have been removed.
+    /* ▼▼▼ [修正] PDFダウンロード機能を復元 ▼▼▼ */
+    function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      let usernameForPdf = wanakana.isJapanese(playerName) ? wanakana.toRomaji(playerName) : playerName;
+      const finalScoreText = retryMode ? `${score} / ${questions.length}` : `${score} / ${allQuestions.length}`;
+      doc.setFontSize(14);
+      doc.text("Quiz Results", 10, 10);
+      if (usernameForPdf) doc.text(`Name: ${usernameForPdf}`, 10, 20);
+      doc.text(`Score: ${finalScoreText}`, 10, 30);
+      let y = 40;
+      userAnswers.forEach((entry, idx) => {
+        if (!entry) return;
+        const originalQuestion = allQuestions.find(q => q.sentence === entry.question);
+        if(!originalQuestion) return;
+        
+        const linesQ = doc.splitTextToSize(`Q${idx + 1}: ${originalQuestion.sentence}`, 180);
+        doc.text(linesQ, 10, y); y += linesQ.length * 7;
+        const linesU = doc.splitTextToSize(`Your Answer: ${entry.user.join(", ")}`, 180);
+        doc.text(linesU, 10, y); y += linesU.length * 7;
+        const linesC = doc.splitTextToSize(`Correct Answer: ${originalQuestion.answers.join(", ")}`, 180);
+        doc.text(linesC, 10, y); y += linesC.length * 7 + 5;
+        if (y > 270) { doc.addPage(); y = 20; }
+      });
+      doc.save("quiz_results.pdf");
+    }
+
+    function downloadWrongPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFontSize(14);
+      doc.text("Wrong Vocabulary Results", 10, 10);
+      let y = 20;
+      wrongAnswers.forEach((q, idx) => {
+        const linesQ = doc.splitTextToSize(`${idx + 1}. ${q.sentence}`, 180);
+        doc.text(linesQ, 10, y); y += linesQ.length * 8;
+        const linesA = doc.splitTextToSize(`Answer: ${q.answers.join(", ")}`, 180);
+        doc.text(linesA, 10, y); y += linesA.length * 8 + 5;
+        if (y > 270) { doc.addPage(); y = 20; }
+      });
+      doc.save("Wrong-vocab.pdf");
+    }
+
+    function downloadHistoryPDF(historyRecord) {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      let usernameForPdf = wanakana.isJapanese(historyRecord.name) ? wanakana.toRomaji(historyRecord.name) : historyRecord.name;
+      doc.setFontSize(16);
+      doc.text("Quiz Results", 105, 15, null, null, "center");
+      doc.setFontSize(12);
+      doc.text(`Name: ${usernameForPdf}`, 10, 25);
+      doc.text(`Score: ${historyRecord.score}`, 10, 32);
+      doc.text(`Date: ${historyRecord.date}`, 10, 39);
+      let y = 50;
+      historyRecord.results.forEach((entry, idx) => {
+        if (!entry) return;
+        const originalQuestion = allQuestions.find(q => q.sentence === entry.question);
+        if(!originalQuestion) return;
+
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+        }
+        const isCorrect = entry.user.every((ans, i) => (ans || "").toLowerCase().trim() === (originalQuestion.answers[i] || "").toLowerCase().trim());
+        doc.setFontSize(12);
+        doc.text(`Q${idx + 1}: ${originalQuestion.sentence}`, 10, y); y += 7;
+        doc.setFontSize(10);
+        doc.setTextColor(isCorrect ? '#28a745' : '#dc3545');
+        doc.text(`Your Answer: ${entry.user.join(", ") || "(no answer)"}`, 15, y); y += 7;
+        if (!isCorrect) {
+          doc.setTextColor('#333333');
+          doc.text(`Correct Answer: ${originalQuestion.answers.join(", ")}`, 15, y); y += 7;
+        }
+        y += 5;
+      });
+      const datePart = historyRecord.date.replace(/[/:\s]/g, '-');
+      const namePart = usernameForPdf.replace(/\s/g, '_');
+      doc.save(`${datePart}-${namePart}.pdf`);
+    }
+
+    function downloadAllQuestionsPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFontSize(16);
+      doc.text("Eiken Pre-1 Vocabulary List", 10, 15);
+      let y = 25;
+      doc.setFontSize(12);
+      allQuestions.forEach((q, idx) => {
+        if (y > 270) { doc.addPage(); y = 20; }
+        const placeholder = q.sentence.match(/\((.*?)\)/);
+        let replacedSentence = q.sentence;
+        if (placeholder) {
+            replacedSentence = q.sentence.replace(placeholder[0], `[ ${q.answers[0]} ]`);
+        } else {
+            replacedSentence = q.sentence.replace('___', `[ ${q.answers[0]} ]`);
+        }
+        const linesQ = doc.splitTextToSize(`${idx + 1}. ${replacedSentence}`, 180);
+        doc.text(linesQ, 10, y);
+        y += linesQ.length * 7 + 5;
+      });
+      doc.save("Eiken-Pre-1-Vocab-List.pdf");
+    }
     /* ▲▲▲ ▲▲▲ */
-
-    // PDF functions are omitted for brevity...
-    function downloadPDF(){}
-    function downloadWrongPDF(){}
-    function downloadHistoryPDF(record){}
-    function downloadAllQuestionsPDF(){}
-
+    
     // --- Event Listeners ---
     pdfBtn.onclick = downloadPDF;
     wrongPdfBtn.onclick = downloadWrongPDF;
