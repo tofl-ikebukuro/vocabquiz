@@ -133,7 +133,8 @@
     #header-buttons-container { display: flex; flex-direction: column; align-items: flex-end; }
     #header-buttons-container div { margin-bottom: 5px; }
     #header-buttons-container div:last-child { margin-bottom: 0; }
-    #toggleHistoryBtn { display: none; }
+    /* Make history button always visible */
+    #toggleHistoryBtn { display: inline-block; }
     .circle-button {
       width: 36px;
       height: 36px;
@@ -259,9 +260,8 @@
       #title { font-size: 22px; margin-bottom: 10px; }
       #header-buttons-container { align-items: center; }
       .button { padding: 10px 12px; font-size: 14px; }
-      #start-screen, .quiz-container { width: 95%; margin: 15px auto; padding: 20px; min-height: 0; }
-      #start-screen h1 { font-size: 24px; }
-      #username, .input-field { width: 90%; box-sizing: border-box; font-size: 18px; }
+      .quiz-container { width: 95%; margin: 15px auto; padding: 20px; min-height: 0; }
+      .input-field { width: 90%; box-sizing: border-box; font-size: 18px; }
       #question { font-size: 22px; }
       #feedback { position: static; transform: none; text-align: center; width: 100%; margin-top: 10px; font-size: 20px; }
       @keyframes popIn {
@@ -275,7 +275,7 @@
   </style>
 </head>
 <body>
-  <header class="hidden">
+  <header>
     <div id="title">Vocabulary Quiz</div>
     <div id="header-buttons-container">
       <div id="top-row-buttons">
@@ -291,14 +291,7 @@
     </div>
   </header>
 
-  <div id="start-screen" class="animate-in">
-    <h1>単語クイズ</h1>
-    <p>Please enter your name to start the quiz.</p>
-    <input type="text" id="username" placeholder="名前を入力">
-    <button class="button btn-green" id="startBtn" disabled>クイズ開始</button>
-  </div>
-
-  <div class="quiz-container hidden">
+  <div class="quiz-container animate-in">
     <div id="question"></div>
     <div id="input-wrapper">
       <div id="inputs"></div>
@@ -376,24 +369,17 @@
       { "sentence": "Her (g_____) personality makes her popular at social gatherings.", "answers": ["Gregarious"], "meaning": [" sociable"] }
     ];
 
-    /* ▼▼▼ [修正] 新しいデータ形式に合わせて、必要なフィールドを動的に生成します ▼▼▼ */
     allQuestions.forEach(q => {
       const placeholder = q.sentence.match(/\((.*?)\)/);
-      // 'translation' フィールドを動的に作成
       if (placeholder) {
         q.translation = q.sentence.replace(placeholder[0], q.answers[0]);
       } else {
-        // フォールバックとして '___' を使用
         q.translation = q.sentence.replace('___', q.answers[0]);
       }
-      // 'blanksTranslation' フィールドを 'meaning' から作成
       q.blanksTranslation = q.meaning;
     });
-    /* ▲▲▲ ▲▲▲ */
 
-    const CORRECT_PASSWORD = '1234';
-
-    let playerName = '';
+    let playerName = 'Guest';
     let questions = [];
     let current = 0, score = 0;
     let lastAnsweredIndex = -1;
@@ -404,12 +390,8 @@
     let englishVoices = [];
 
     const header = document.querySelector("header");
-    const startScreen = document.getElementById("start-screen");
-    const startBtn = document.getElementById("startBtn");
-    const usernameInput = document.getElementById("username");
     const quizContainer = document.querySelector(".quiz-container");
     const mainTitle = document.getElementById("title");
-    const startScreenTitle = document.querySelector("#start-screen h1");
     const qEl = document.getElementById("question");
     const inputEl = document.getElementById("inputs");
     const feedbackEl = document.getElementById("feedback");
@@ -487,7 +469,7 @@
         if (!answer) return false;
         const q = allQuestions.find(q => q.sentence === answer.question);
         if (!q) return false;
-        return answer.user.every((userAns, i) => (userAns || "").toLowerCase() === (q.answers[i] || "").toLowerCase());
+        return answer.user.every((userAns, i) => (userAns || "").toLowerCase().trim() === (q.answers[i] || "").toLowerCase().trim());
       }).length;
     }
 
@@ -536,12 +518,12 @@
       inputs.forEach((inp, i) => {
         inp.value = recordedEntry.user[i] || "";
         inp.disabled = true;
-        const wasThisPartCorrect = (recordedEntry.user[i] || "").toLowerCase() === (q.answers[i] || "").toLowerCase();
+        const wasThisPartCorrect = (recordedEntry.user[i] || "").toLowerCase().trim() === (q.answers[i] || "").toLowerCase().trim();
         inp.style.borderColor = wasThisPartCorrect ? 'var(--duo-green)' : 'var(--duo-red)';
         inp.style.borderWidth = '2px';
       });
       submitBtn.classList.add("hidden");
-      const userWasCorrect = recordedEntry.user.every((ans, i) => (ans || "").toLowerCase() === (q.answers[i] || "").toLowerCase());
+      const userWasCorrect = recordedEntry.user.every((ans, i) => (ans || "").toLowerCase().trim() === (q.answers[i] || "").toLowerCase().trim());
       feedbackEl.className = "feedback-animate";
       feedbackEl.textContent = userWasCorrect ? "✅ 正解！" : "❌ 不正解";
       feedbackEl.classList.add(userWasCorrect ? "correct" : "incorrect");
@@ -598,7 +580,7 @@
           highlightedSentence = highlightedSentence.replace(new RegExp(`\\b(${ans})\\b`, 'gi'), `<span style="font-weight: 900; color: red;">$1</span>`);
         });
         const userAnswersGiven = entry.user.join(", ");
-        const isAnswerCorrect = entry.user.every((ans, i) => (ans || "").toLowerCase() === (originalQuestion.answers[i] || "").toLowerCase());
+        const isAnswerCorrect = entry.user.every((ans, i) => (ans || "").toLowerCase().trim() === (originalQuestion.answers[i] || "").toLowerCase().trim());
         let yourAnswerHTML = isAnswerCorrect ? `<p style="margin: 5px 0;"><b>あなたの回答:</b> ${userAnswersGiven} <span style="color: var(--duo-green);">✅</span></p>` : `<p style="margin: 5px 0;"><b>あなたの回答:</b> <span style="color: var(--duo-red);">${userAnswersGiven || "(無回答)"}</span> ❌</p>`;
         const div = document.createElement("div");
         div.style.cssText = "text-align: left; margin: 15px 10px; border-bottom: 1px solid #eee; padding-bottom: 10px;";
@@ -723,36 +705,22 @@
     downloadAllBtn.onclick = downloadAllQuestionsPDF;
     backToStartBtn.onclick = restartQuiz;
 
+    /* ▼▼▼ [変更] パスワードチェックを削除 ▼▼▼ */
     toggleHistoryBtn.addEventListener('click', () => {
-      if (historyContainer.classList.contains('show')) {
-        historyContainer.classList.remove('show');
-      } else {
-        const inputPassword = prompt('パスワードを入力してください:');
-        if (inputPassword === null) return;
-        if (inputPassword === CORRECT_PASSWORD) {
-          historyContainer.classList.add('show');
-        } else {
-          alert('パスワードが違います。');
-        }
-      }
+      historyContainer.classList.toggle('show');
     });
 
     closeHistoryBtn.onclick = () => { historyContainer.classList.remove('show'); };
 
     clearHistoryBtn.addEventListener('click', () => {
-      const inputPassword = prompt('履歴を削除するにはパスワードを入力してください:');
-      if (inputPassword === null) return;
-      if (inputPassword === CORRECT_PASSWORD) {
-        if (confirm('本当によろしいですか？すべての履歴が完全に削除されます。')) {
-          localStorage.removeItem('quizPlayHistory');
-          historySearchInput.value = '';
-          displayPlayHistory();
-          alert('履歴を削除しました。');
-        }
-      } else {
-        alert('パスワードが違います。');
+      if (confirm('本当によろしいですか？すべての履歴が完全に削除されます。')) {
+        localStorage.removeItem('quizPlayHistory');
+        historySearchInput.value = '';
+        displayPlayHistory();
+        alert('履歴を削除しました。');
       }
     });
+    /* ▲▲▲ ▲▲▲ */
 
     function secretClickHandler() {
       titleClickCount++;
@@ -766,8 +734,7 @@
     }
 
     mainTitle.addEventListener('click', secretClickHandler);
-    startScreenTitle.addEventListener('click', secretClickHandler);
-
+    
     document.addEventListener('keyup', (event) => {
       if (event.key !== 'Enter') return;
       if (keyupLock) { keyupLock = false; return; }
@@ -775,32 +742,14 @@
       if (!nextBtn.classList.contains('hidden')) { handleNextClick(); } 
       else if (!showAllBtn.classList.contains('hidden')) { showAllResults(); }
     });
-
+    
+    /* ▼▼▼ [変更] ページ読み込み時の処理を修正 ▼▼▼ */
     document.addEventListener('DOMContentLoaded', () => {
       displayPlayHistory();
-    });
-
-    usernameInput.addEventListener('input', () => {
-        startBtn.disabled = usernameInput.value.trim() === '';
-    });
-
-    startBtn.addEventListener('click', () => {
-      playerName = usernameInput.value.trim();
-      startScreen.classList.remove('animate-in');
-      startScreen.classList.add('hidden');
-      quizContainer.classList.remove('hidden');
-      header.classList.remove('hidden');
+      // クイズを自動的に開始
       initQuiz();
     });
-
-    usernameInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        if (!startBtn.disabled) {
-          event.preventDefault();
-          startBtn.click();
-        }
-      }
-    });
+    /* ▲▲▲ ▲▲▲ */
 
     historySearchInput.addEventListener('input', () => {
       displayPlayHistory(historySearchInput.value);
