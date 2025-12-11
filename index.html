@@ -284,57 +284,538 @@
 
   <script>
     let allQuestions = [
-      { "sentence": "The beauty of the sunset was so (i_____) that words could not describe it.", "answers": ["Ineffable"], "meaning": [" too great or extreme to be described"] },
-      { "sentence": "After working for twelve hours straight, she felt completely (l_____).", "answers": ["Lethargic"], "meaning": [" lacking energy"] },
-      { "sentence": "He tried to (m_____) his friend’s anger by apologizing sincerely.", "answers": ["Mollify"], "meaning": [" to calm or soothe someone"] },
-      { "sentence": "This café is the (q_____) example of a cozy neighborhood spot.", "answers": ["Quintessential"], "meaning": [" the most perfect example of something"] },
-      { "sentence": "The storm finally began to (a_____), and the skies cleared.", "answers": ["Abate"], "meaning": [" to become less intense"] },
-      { "sentence": "She reluctantly decided to (a_____) to her parents’ wishes.", "answers": ["Acquiesce"], "meaning": [" to accept something hesitantly but without protest"] },
-      { "sentence": "His tone was (b_____), showing he was ready for an argument.", "answers": ["Belligerent"], "meaning": [" aggressive or ready to fight"] },
-      { "sentence": "I tried to (c_____) my sister into coming with us by promising free food.", "answers": ["Cajole"], "meaning": [" to persuade someone using flattery or gentle urging"] },
-      { "sentence": "Out of (d_____) to her teacher, she didn’t interrupt during the lecture.", "answers": ["Deference"], "meaning": [" quiet, yielding to another’s opinion"] },
-      { "sentence": "The meaning of the ancient symbol remains (e_____) to this day.", "answers": ["Elusive"], "meaning": [" difficult to find, catch, or understand"] },
-      { "sentence": "She has always been (k_____) to learn new languages.", "answers": ["Keen"], "meaning": [" highly developed"] },
-      { "sentence": "He started a (l_____) online business that grew rapidly.", "answers": ["Lucrative"], "meaning": [" producing a great deal of profit"] },
-      { "sentence": "Some scientists (p_____) that life exists beyond our planet.", "answers": ["Postulate"], "meaning": [" suggest or assume the existence of something"] },
-      { "sentence": "The device was a clever (c_____) to make daily chores easier.", "answers": ["Contrivance"], "meaning": [" the use of skill to create"] },
-      { "sentence": "His careless words had (c_____) effects on their friendship.", "answers": ["Consequential"], "meaning": [" important or significant"] },
-      { "sentence": "Good manners are often seen as a sign of proper (b_____).", "answers": ["Breeding"], "meaning": [" reproduction"] },
-      { "sentence": "The new policy introduced a (p_____) of problems for the staff.", "answers": ["Plethora"], "meaning": [" an excessive amount of something"] },
-      { "sentence": "The results appeared completely (r_____) with no clear pattern.", "answers": ["Random"], "meaning": [" without purpose"] },
-      { "sentence": "The volcano has been (d_____) for centuries but could erupt again.", "answers": ["Dormant"], "meaning": [" inactive, asleep"] },
-      { "sentence": "The machine’s main (c_____) include a motor, gears, and sensors.", "answers": ["Components"], "meaning": [" elements that make up a larger whole"] },
-      { "sentence": "You shouldn’t (d_____) too far from the original plan.", "answers": ["Deviate"], "meaning": [" to depart from the normal or typical"] },
-      { "sentence": "The disease can (d_____) even a strong person over time.", "answers": ["Debilitate"], "meaning": [" to weaken"] },
-      { "sentence": "Her speech was so (e_____) that everyone listened in silence.", "answers": ["Eloquent"], "meaning": [" fluent in speaking or writing"] },
-      { "sentence": "His smile was (e_____), leaving others unsure of his true feelings.", "answers": ["Enigmatic"], "meaning": [" mysterious"] },
-      { "sentence": "His (i_____) decision to quit shocked everyone.", "answers": ["Impetuous"], "meaning": [" acting quickly without thought or care"] },
-      { "sentence": "Many old technologies have become (o_____) due to innovation.", "answers": ["Obsolete"], "meaning": [" no longer in use"] },
-      { "sentence": "Critics often (d_____) his ideas as unrealistic.", "answers": ["Deride"], "meaning": [" ridicule"] },
-      { "sentence": "The company’s mistake was so (e_____) that it made headlines.", "answers": ["Egregious"], "meaning": [" shocking"] },
-      { "sentence": "The sudden drop in temperature was a (h_____) of the coming storm.", "answers": ["Harbinger"], "meaning": [" a signal of something to come"] },
-      { "sentence": "After the flood, emergency workers were (i_____) with requests for help.", "answers": ["Inundate"], "meaning": [" to overwhelm"] },
-      { "sentence": "Her heart was heavy with (g_____) after hearing the news.", "answers": ["Grief"], "meaning": [" intense emotional pain caused by a loss"] },
-      { "sentence": "People around the world (l_____) the loss of the great leader.", "answers": ["Lament"], "meaning": [" to express grief"] },
-      { "sentence": "His (m_____) behavior made others feel uncomfortable.", "answers": ["Malevolent"], "meaning": [" having or showing a wish to do evil to others"] },
-      { "sentence": "The villain’s (n_____) plan was finally uncovered.", "answers": ["Nefarious"], "meaning": [" evil"] },
-      { "sentence": "His (o_____) lifestyle showed off his wealth.", "answers": ["Ostentatious"], "meaning": [" displaying wealth in a way to attract attention"] },
-      { "sentence": "Every great plan has at least one small (f_____) in it.", "answers": ["Flaw"], "meaning": [" defect"] },
-      { "sentence": "We need evidence to (s_____) your claim.", "answers": ["Substantiate"], "meaning": [" to provide evidence"] },
-      { "sentence": "She is (a_____) at solving complex problems quickly.", "answers": ["Adept"], "meaning": [" highly skilled"] },
-      { "sentence": "There is often a (d_____) between theory and practice.", "answers": ["Dichotomy"], "meaning": [" two things that are completely different"] },
-      { "sentence": "The tumor was found to be (b_____), not dangerous.", "answers": ["Benign"], "meaning": [" gentle"] },
-      { "sentence": "They come from (d_____) backgrounds but share similar dreams.", "answers": ["Disparate"], "meaning": [" very different"] },
-      { "sentence": "The scientist gathered (e_____) data to support the hypothesis.", "answers": ["Empirical"], "meaning": [" based on observation"] },
-      { "sentence": "He managed to (g_____) a lot of experience through internships.", "answers": ["Garner"], "meaning": [" collect"] },
-      { "sentence": "A judge must remain (i_____) in every case.", "answers": ["Impartial"], "meaning": [" fair"] },
-      { "sentence": "It’s difficult to (q_____) someone’s creativity.", "answers": ["Quantify"], "meaning": [" to measure or express the amount of something"] },
-      { "sentence": "Taking short breaks can help (a_____) stress during work.", "answers": ["Alleviate"], "meaning": [" to reduce pain or difficulty"] },
-      { "sentence": "The organization aims to (d_____) information about health issues.", "answers": ["Disseminate"], "meaning": [" to spread widely"] },
-      { "sentence": "The teacher asked questions to (e_____) deeper responses from the class.", "answers": ["Elicit"], "meaning": [" to draw out a response"] },
-      { "sentence": "He is so (f_____) that he spends hours perfecting each detail.", "answers": ["Fastidious"], "meaning": [" very attentive to detail"] },
-      { "sentence": "Her (g_____) personality makes her popular at social gatherings.", "answers": ["Gregarious"], "meaning": [" sociable"] }
-    ];
+  {
+    "sentence": "The photographer was asked to leave because his presence was i________.",
+    "answers": [
+      "intrusive"
+    ],
+    "meaning": [
+      "interrupting"
+    ]
+  },
+  {
+    "sentence": "Flu is more p________ in the winter months than in the summer.",
+    "answers": [
+      "prevalent"
+    ],
+    "meaning": [
+      "existing at a particular time"
+    ]
+  },
+  {
+    "sentence": "We are confident that truth will p______ o___ lies in this trial.",
+    "answers": [
+      "prevail over"
+    ],
+    "meaning": [
+      "win over / triumph"
+    ]
+  },
+  {
+    "sentence": "The author belongs to the r________ s_____, depicting life exactly as it happens.",
+    "answers": [
+      "realistic school"
+    ],
+    "meaning": [
+      "writers who describe real life as it is"
+    ]
+  },
+  {
+    "sentence": "The citizens revolted against the o_________ of the strict government.",
+    "answers": [
+      "oppression"
+    ],
+    "meaning": [
+      "pressure (プレッシャー)"
+    ]
+  },
+  {
+    "sentence": "It was a d____________ act that ruined his reputation forever.",
+    "answers": [
+      "discreditable"
+    ],
+    "meaning": [
+      "dishonour"
+    ]
+  },
+  {
+    "sentence": "She used s_________ to avoid answering the difficult question directly.",
+    "answers": [
+      "subterfuge"
+    ],
+    "meaning": [
+      "excuses"
+    ]
+  },
+  {
+    "sentence": "The CEO h__ s__ f____ a new plan for the company's future.",
+    "answers": [
+      "has set forth"
+    ],
+    "meaning": [
+      "said accurately"
+    ]
+  },
+  {
+    "sentence": "He felt a cold, i_________ w______ for the statue rather than true devotion.",
+    "answers": [
+      "impersonal worship"
+    ],
+    "meaning": [
+      "cold admiration"
+    ]
+  },
+  {
+    "sentence": "This difficult project will e____ a lot of effort from every team member.",
+    "answers": [
+      "exact"
+    ],
+    "meaning": [
+      "require"
+    ]
+  },
+  {
+    "sentence": "His v____ p_______ drove him to work late into the night every day.",
+    "answers": [
+      "vital passions"
+    ],
+    "meaning": [
+      "strong energy"
+    ]
+  },
+  {
+    "sentence": "She showed a m________ d_____ to succeed despite the challenges.",
+    "answers": [
+      "masterful desire"
+    ],
+    "meaning": [
+      "determination"
+    ]
+  },
+  {
+    "sentence": "His identity is closely b____ u_ w___ his career as a musician.",
+    "answers": [
+      "bound up with"
+    ],
+    "meaning": [
+      "closely connected"
+    ]
+  },
+  {
+    "sentence": "After the mistake, he felt a deep c____________ o_ i_____ failure.",
+    "answers": [
+      "consciousness of inward"
+    ],
+    "meaning": [
+      "defeat"
+    ]
+  },
+  {
+    "sentence": "The abandoned house fell into a state of d____ after many years.",
+    "answers": [
+      "decay"
+    ],
+    "meaning": [
+      "loss"
+    ]
+  },
+  {
+    "sentence": "He helped me, and in i__ t___, I helped him with his project later.",
+    "answers": [
+      "its turn"
+    ],
+    "meaning": [
+      "as a result"
+    ]
+  },
+  {
+    "sentence": "The loud noise h_______ his departure from the party.",
+    "answers": [
+      "hastened"
+    ],
+    "meaning": [
+      "made something happen faster"
+    ]
+  },
+  {
+    "sentence": "Some business people t_____ o_ stress and high-pressure situations.",
+    "answers": [
+      "thrive on"
+    ],
+    "meaning": [
+      "live on"
+    ]
+  },
+  {
+    "sentence": "Her shyness i________ her from speaking during the meeting.",
+    "answers": [
+      "inhibited"
+    ],
+    "meaning": [
+      "stopped"
+    ]
+  },
+  {
+    "sentence": "He l____ d___ on anyone who doesn't agree with his opinion.",
+    "answers": [
+      "looks down"
+    ],
+    "meaning": [
+      "consider"
+    ]
+  },
+  {
+    "sentence": "Watching television is often a form of p______ e________.",
+    "answers": [
+      "passive enjoyment"
+    ],
+    "meaning": [
+      "pleasure you receive without doing any"
+    ]
+  },
+  {
+    "sentence": "Many English words are d______ f___ Latin or Greek roots.",
+    "answers": [
+      "derived from"
+    ],
+    "meaning": [
+      "came from"
+    ]
+  },
+  {
+    "sentence": "He wrote the poem during m______ o_ a_____ and intense emotion.",
+    "answers": [
+      "moments of ardour"
+    ],
+    "meaning": [
+      "when he feels passionate"
+    ]
+  },
+  {
+    "sentence": "The politician faced m____ d____________ for his dishonest behavior.",
+    "answers": [
+      "moral denunciations"
+    ],
+    "meaning": [
+      "moral criticism"
+    ]
+  },
+  {
+    "sentence": "Regular exercise can improve your overall health and v_______.",
+    "answers": [
+      "vitality"
+    ],
+    "meaning": [
+      "energy"
+    ]
+  },
+  {
+    "sentence": "He woke up early s_ a_ t_ arrive at the airport on time.",
+    "answers": [
+      "so as to"
+    ],
+    "meaning": [
+      "in order to"
+    ]
+  },
+  {
+    "sentence": "In his l______ time, he enjoys reading and painting.",
+    "answers": [
+      "leisure"
+    ],
+    "meaning": [
+      "enjoyment"
+    ]
+  },
+  {
+    "sentence": "The o____ of the disease was marked by a high fever.",
+    "answers": [
+      "onset"
+    ],
+    "meaning": [
+      "the beginning of something (unpleasant)"
+    ]
+  },
+  {
+    "sentence": "The vultures circled above the c______ of the animal.",
+    "answers": [
+      "carcass"
+    ],
+    "meaning": [
+      "the main body or mass of a structure"
+    ]
+  },
+  {
+    "sentence": "The company is suffering from a large financial d______.",
+    "answers": [
+      "deficit"
+    ],
+    "meaning": [
+      "the amount of something → too small"
+    ]
+  },
+  {
+    "sentence": "Fear can i______ people from taking necessary risks.",
+    "answers": [
+      "inhibit"
+    ],
+    "meaning": [
+      "restrain"
+    ]
+  },
+  {
+    "sentence": "Scientists studied the g_______ of the plant to understand its traits.",
+    "answers": [
+      "genotype"
+    ],
+    "meaning": [
+      "the genetic constitution of an individual organism"
+    ]
+  },
+  {
+    "sentence": "She d___________ left the door open so the cat could enter.",
+    "answers": [
+      "deliberately"
+    ],
+    "meaning": [
+      "intentionally"
+    ]
+  },
+  {
+    "sentence": "He has a t_______ to talk too much when he is nervous.",
+    "answers": [
+      "tendency"
+    ],
+    "meaning": [
+      "inclination"
+    ]
+  },
+  {
+    "sentence": "We only have a f_____ amount of time to finish this exam.",
+    "answers": [
+      "finite"
+    ],
+    "meaning": [
+      "limited"
+    ]
+  },
+  {
+    "sentence": "Birds have an i__________ t_______ to migrate before winter arrives.",
+    "answers": [
+      "instinctive tendency"
+    ],
+    "meaning": [
+      "natural lines"
+    ]
+  },
+  {
+    "sentence": "Your proposal seems to r__ c______ t_ our original agreement.",
+    "answers": [
+      "run counter to"
+    ],
+    "meaning": [
+      "go against drive"
+    ]
+  },
+  {
+    "sentence": "A_ a r___, we do not allow eating in the library.",
+    "answers": [
+      "as a rule"
+    ],
+    "meaning": [
+      "usually"
+    ]
+  },
+  {
+    "sentence": "Be careful not to m_______ the sculpture when moving it.",
+    "answers": [
+      "mutilate"
+    ],
+    "meaning": [
+      "damage"
+    ]
+  },
+  {
+    "sentence": "The new law was passed to improve h____ w______ across the country.",
+    "answers": [
+      "human welfare"
+    ],
+    "meaning": [
+      "human being"
+    ]
+  },
+  {
+    "sentence": "The travelers were w____ after walking for ten hours.",
+    "answers": [
+      "weary"
+    ],
+    "meaning": [
+      "extremely tired"
+    ]
+  },
+  {
+    "sentence": "I d____ thinking about how much work I have to do tomorrow.",
+    "answers": [
+      "dread"
+    ],
+    "meaning": [
+      "strong fear"
+    ]
+  },
+  {
+    "sentence": "The government plans to e____ new safety regulations next month.",
+    "answers": [
+      "enact"
+    ],
+    "meaning": [
+      "validate a law"
+    ]
+  },
+  {
+    "sentence": "There was a s__________ increase in sales this quarter.",
+    "answers": [
+      "substantial"
+    ],
+    "meaning": [
+      "essential"
+    ]
+  },
+  {
+    "sentence": "She wore a thick w_____ sweater to stay warm in the snow.",
+    "answers": [
+      "woolen"
+    ],
+    "meaning": [
+      "a fabric made from the hair of sheep"
+    ]
+  },
+  {
+    "sentence": "The company is pursuing d______________ by entering new markets.",
+    "answers": [
+      "diversification"
+    ],
+    "meaning": [
+      "becoming more diverse"
+    ]
+  },
+  {
+    "sentence": "He spoke with b_______ when he challenged the manager's decision.",
+    "answers": [
+      "boldness"
+    ],
+    "meaning": [
+      "to take risk (confidence)"
+    ]
+  },
+  {
+    "sentence": "The car r_____ into the wall because the brakes failed.",
+    "answers": [
+      "rammed"
+    ],
+    "meaning": [
+      "struck against something with heavy impact"
+    ]
+  },
+  {
+    "sentence": "She s_____ the flour to remove any lumps before baking.",
+    "answers": [
+      "sifted"
+    ],
+    "meaning": [
+      "filter"
+    ]
+  },
+  {
+    "sentence": "His r________ about his past made everyone curious.",
+    "answers": [
+      "reticence"
+    ],
+    "meaning": [
+      "restraint / reserve"
+    ]
+  },
+  {
+    "sentence": "Several witnesses will t______ in court tomorrow.",
+    "answers": [
+      "testify"
+    ],
+    "meaning": [
+      "confirm"
+    ]
+  },
+  {
+    "sentence": "He seems completely i__________ t_ the criticism he receives.",
+    "answers": [
+      "indifferent to"
+    ],
+    "meaning": [
+      "not caring about"
+    ]
+  },
+  {
+    "sentence": "Her p________ made her believe the project would definitely fail.",
+    "answers": [
+      "pessimism"
+    ],
+    "meaning": [
+      "things will go badly"
+    ]
+  },
+  {
+    "sentence": "The prisoners were d_______ of food and water for two days.",
+    "answers": [
+      "deprived"
+    ],
+    "meaning": [
+      "taken away"
+    ]
+  },
+  {
+    "sentence": "The building was d_____ unsafe by the inspectors.",
+    "answers": [
+      "deemed"
+    ],
+    "meaning": [
+      "considered"
+    ]
+  },
+  {
+    "sentence": "They overcame great a________ to reach the top of the mountain.",
+    "answers": [
+      "adversity"
+    ],
+    "meaning": [
+      "difficult situation"
+    ]
+  },
+  {
+    "sentence": "We must e________ to finish this task by the deadline.",
+    "answers": [
+      "endeavour"
+    ],
+    "meaning": [
+      "serious effort"
+    ]
+  },
+  {
+    "sentence": "The museum will e______ a collection of ancient artifacts.",
+    "answers": [
+      "exhibit"
+    ],
+    "meaning": [
+      "reveal / display"
+    ]
+  },
+  {
+    "sentence": "It would b______ you to study harder if you want to pass.",
+    "answers": [
+      "behoove"
+    ],
+    "meaning": [
+      "in the interests of"
+    ]
+  }
+ ];
 
     allQuestions.forEach(q => {
       const placeholder = q.sentence.match(/\((.*?)\)/);
