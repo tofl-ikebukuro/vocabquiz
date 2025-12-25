@@ -283,539 +283,458 @@
   </div>
 
   <script>
-    let allQuestions = [
+    let allQuestions =[
   {
-    "sentence": "The photographer was asked to leave because his presence was i________.",
-    "answers": [
-      "intrusive"
-    ],
-    "meaning": [
-      "interrupting"
-    ]
-  },
-  {
-    "sentence": "Flu is more p________ in the winter months than in the summer.",
-    "answers": [
-      "prevalent"
-    ],
-    "meaning": [
-      "existing at a particular time"
-    ]
-  },
-  {
-    "sentence": "We are confident that truth will p______ o___ lies in this trial.",
-    "answers": [
-      "prevail over"
-    ],
-    "meaning": [
-      "win over / triumph"
-    ]
-  },
-  {
-    "sentence": "The author belongs to the r________ s_____, depicting life exactly as it happens.",
-    "answers": [
-      "realistic school"
-    ],
-    "meaning": [
-      "writers who describe real life as it is"
-    ]
-  },
-  {
-    "sentence": "The citizens revolted against the o_________ of the strict government.",
-    "answers": [
-      "oppression"
-    ],
-    "meaning": [
-      "pressure (プレッシャー)"
-    ]
-  },
-  {
-    "sentence": "It was a d____________ act that ruined his reputation forever.",
-    "answers": [
-      "discreditable"
-    ],
-    "meaning": [
-      "dishonour"
-    ]
-  },
-  {
-    "sentence": "She used s_________ to avoid answering the difficult question directly.",
-    "answers": [
-      "subterfuge"
-    ],
-    "meaning": [
-      "excuses"
-    ]
-  },
-  {
-    "sentence": "The CEO h__ s__ f____ a new plan for the company's future.",
-    "answers": [
-      "has set forth"
-    ],
-    "meaning": [
-      "said accurately"
-    ]
-  },
-  {
-    "sentence": "He felt a cold, i_________ w______ for the statue rather than true devotion.",
-    "answers": [
-      "impersonal worship"
-    ],
-    "meaning": [
-      "cold admiration"
-    ]
-  },
-  {
-    "sentence": "This difficult project will e____ a lot of effort from every team member.",
-    "answers": [
-      "exact"
-    ],
-    "meaning": [
-      "require"
-    ]
-  },
-  {
-    "sentence": "His v____ p_______ drove him to work late into the night every day.",
-    "answers": [
-      "vital passions"
-    ],
-    "meaning": [
-      "strong energy"
-    ]
-  },
-  {
-    "sentence": "She showed a m________ d_____ to succeed despite the challenges.",
-    "answers": [
-      "masterful desire"
-    ],
-    "meaning": [
-      "determination"
-    ]
-  },
-  {
-    "sentence": "His identity is closely b____ u_ w___ his career as a musician.",
-    "answers": [
-      "bound up with"
-    ],
-    "meaning": [
-      "closely connected"
-    ]
-  },
-  {
-    "sentence": "After the mistake, he felt a deep c____________ o_ i_____ failure.",
-    "answers": [
-      "consciousness of inward"
-    ],
-    "meaning": [
-      "defeat"
-    ]
-  },
-  {
-    "sentence": "The abandoned house fell into a state of d____ after many years.",
-    "answers": [
-      "decay"
-    ],
-    "meaning": [
-      "loss"
-    ]
-  },
-  {
-    "sentence": "He helped me, and in i__ t___, I helped him with his project later.",
-    "answers": [
-      "its turn"
-    ],
-    "meaning": [
-      "as a result"
-    ]
-  },
-  {
-    "sentence": "The loud noise h_______ his departure from the party.",
-    "answers": [
-      "hastened"
-    ],
-    "meaning": [
-      "made something happen faster"
-    ]
-  },
-  {
-    "sentence": "Some business people t_____ o_ stress and high-pressure situations.",
-    "answers": [
-      "thrive on"
-    ],
-    "meaning": [
-      "live on"
-    ]
-  },
-  {
-    "sentence": "Her shyness i________ her from speaking during the meeting.",
-    "answers": [
-      "inhibited"
-    ],
-    "meaning": [
-      "stopped"
-    ]
-  },
-  {
-    "sentence": "He l____ d___ on anyone who doesn't agree with his opinion.",
-    "answers": [
-      "looks down"
-    ],
-    "meaning": [
-      "consider"
-    ]
-  },
-  {
-    "sentence": "Watching television is often a form of p______ e________.",
-    "answers": [
-      "passive enjoyment"
-    ],
-    "meaning": [
-      "pleasure you receive without doing any"
-    ]
-  },
-  {
-    "sentence": "Many English words are d______ f___ Latin or Greek roots.",
-    "answers": [
-      "derived from"
-    ],
-    "meaning": [
-      "came from"
-    ]
-  },
-  {
-    "sentence": "He wrote the poem during m______ o_ a_____ and intense emotion.",
-    "answers": [
-      "moments of ardour"
-    ],
-    "meaning": [
-      "when he feels passionate"
-    ]
-  },
-  {
-    "sentence": "The politician faced m____ d____________ for his dishonest behavior.",
-    "answers": [
-      "moral denunciations"
-    ],
-    "meaning": [
-      "moral criticism"
-    ]
-  },
-  {
-    "sentence": "Regular exercise can improve your overall health and v_______.",
-    "answers": [
-      "vitality"
-    ],
-    "meaning": [
-      "energy"
-    ]
-  },
-  {
-    "sentence": "He woke up early s_ a_ t_ arrive at the airport on time.",
-    "answers": [
-      "so as to"
-    ],
-    "meaning": [
-      "in order to"
-    ]
-  },
-  {
-    "sentence": "In his l______ time, he enjoys reading and painting.",
-    "answers": [
-      "leisure"
-    ],
-    "meaning": [
-      "enjoyment"
-    ]
-  },
-  {
-    "sentence": "The o____ of the disease was marked by a high fever.",
-    "answers": [
-      "onset"
-    ],
-    "meaning": [
-      "the beginning of something (unpleasant)"
-    ]
-  },
-  {
-    "sentence": "The vultures circled above the c______ of the animal.",
-    "answers": [
-      "carcass"
-    ],
-    "meaning": [
-      "the main body or mass of a structure"
-    ]
-  },
-  {
-    "sentence": "The company is suffering from a large financial d______.",
-    "answers": [
-      "deficit"
-    ],
-    "meaning": [
-      "the amount of something → too small"
-    ]
-  },
-  {
-    "sentence": "Fear can i______ people from taking necessary risks.",
-    "answers": [
-      "inhibit"
-    ],
-    "meaning": [
-      "restrain"
-    ]
-  },
-  {
-    "sentence": "Scientists studied the g_______ of the plant to understand its traits.",
-    "answers": [
-      "genotype"
-    ],
-    "meaning": [
-      "the genetic constitution of an individual organism"
-    ]
-  },
-  {
-    "sentence": "She d___________ left the door open so the cat could enter.",
-    "answers": [
-      "deliberately"
-    ],
-    "meaning": [
-      "intentionally"
-    ]
-  },
-  {
-    "sentence": "He has a t_______ to talk too much when he is nervous.",
+    "sentence": "He has a t_______ to overthink things when he is stressed.",
     "answers": [
       "tendency"
     ],
     "meaning": [
-      "inclination"
+      "inclination; a natural leaning"
     ]
   },
   {
-    "sentence": "We only have a f_____ amount of time to finish this exam.",
+    "sentence": "The program is g_____ towards helping young entrepreneurs start their businesses.",
     "answers": [
-      "finite"
+      "geared"
     ],
     "meaning": [
-      "limited"
+      "designed or adapted for a particular purpose"
     ]
   },
   {
-    "sentence": "Birds have an i__________ t_______ to migrate before winter arrives.",
+    "sentence": "Small businesses often f_______ when the economy is stable.",
     "answers": [
-      "instinctive tendency"
+      "flourish"
     ],
     "meaning": [
-      "natural lines"
+      "to grow or develop successfully"
     ]
   },
   {
-    "sentence": "Your proposal seems to r__ c______ t_ our original agreement.",
+    "sentence": "They struggled to walk through the s_____ ground after the heavy rain.",
     "answers": [
-      "run counter to"
+      "swampy"
     ],
     "meaning": [
-      "go against drive"
+      "muddy; waterlogged"
     ]
   },
   {
-    "sentence": "A_ a r___, we do not allow eating in the library.",
+    "sentence": "The police have r____ o__ the possibility of theft in this case.",
     "answers": [
-      "as a rule"
+      "ruled out"
     ],
     "meaning": [
-      "usually"
+      "excluded; eliminated from consideration"
     ]
   },
   {
-    "sentence": "Be careful not to m_______ the sculpture when moving it.",
+    "sentence": "The magician performed an a__________ trick that left the audience speechless.",
     "answers": [
-      "mutilate"
+      "astonishing"
     ],
     "meaning": [
-      "damage"
+      "extremely surprising"
     ]
   },
   {
-    "sentence": "The new law was passed to improve h____ w______ across the country.",
+    "sentence": "The water in the kids' pool is very s______, so it is safe for toddlers.",
     "answers": [
-      "human welfare"
+      "shallow"
     ],
     "meaning": [
-      "human being"
+      "not deep"
     ]
   },
   {
-    "sentence": "The travelers were w____ after walking for ten hours.",
+    "sentence": "We only have f__________ evidence about what happened that night.",
     "answers": [
-      "weary"
+      "fragmentary"
     ],
     "meaning": [
-      "extremely tired"
+      "incomplete; made of pieces"
     ]
   },
   {
-    "sentence": "I d____ thinking about how much work I have to do tomorrow.",
+    "sentence": "Archaeologists discovered an ancient t_______ preserved in the mud.",
     "answers": [
-      "dread"
+      "trackway"
     ],
     "meaning": [
-      "strong fear"
+      "a path formed by footprints or traces"
     ]
   },
   {
-    "sentence": "The government plans to e____ new safety regulations next month.",
+    "sentence": "She needs to h___ her public speaking skills before the conference.",
     "answers": [
-      "enact"
+      "hone"
     ],
     "meaning": [
-      "validate a law"
+      "to sharpen or refine"
     ]
   },
   {
-    "sentence": "There was a s__________ increase in sales this quarter.",
+    "sentence": "The company plans to s_________ its operations to save money.",
     "answers": [
-      "substantial"
+      "streamline"
     ],
     "meaning": [
-      "essential"
+      "to shape to reduce resistance"
     ]
   },
   {
-    "sentence": "She wore a thick w_____ sweater to stay warm in the snow.",
+    "sentence": "Monkeys spend a lot of time g_______ each other to build social bonds.",
     "answers": [
-      "woolen"
+      "grooming"
     ],
     "meaning": [
-      "a fabric made from the hair of sheep"
+      "the practice of cleaning or brushing an animal"
     ]
   },
   {
-    "sentence": "The company is pursuing d______________ by entering new markets.",
+    "sentence": "He was stung by a w___ while gardening in the backyard.",
     "answers": [
-      "diversification"
+      "wasp"
     ],
     "meaning": [
-      "becoming more diverse"
+      "a stinging insect"
     ]
   },
   {
-    "sentence": "He spoke with b_______ when he challenged the manager's decision.",
+    "sentence": "You should not d______ yourself of sleep just to finish the assignment.",
     "answers": [
-      "boldness"
+      "deprive"
     ],
     "meaning": [
-      "to take risk (confidence)"
+      "to take something away"
     ]
   },
   {
-    "sentence": "The car r_____ into the wall because the brakes failed.",
+    "sentence": "Technology will continue to e_____ rapidly in the coming years.",
     "answers": [
-      "rammed"
+      "evolve"
     ],
     "meaning": [
-      "struck against something with heavy impact"
+      "to develop gradually"
     ]
   },
   {
-    "sentence": "She s_____ the flour to remove any lumps before baking.",
+    "sentence": "The assistant had to t_________ the entire interview from the recording.",
     "answers": [
-      "sifted"
+      "transcribe"
     ],
     "meaning": [
-      "filter"
+      "to put into written form"
     ]
   },
   {
-    "sentence": "His r________ about his past made everyone curious.",
+    "sentence": "The government wants to c_____ these customary rules into written law.",
     "answers": [
-      "reticence"
+      "codify"
     ],
     "meaning": [
-      "restraint / reserve"
+      "to arrange laws or rules into a system"
     ]
   },
   {
-    "sentence": "Several witnesses will t______ in court tomorrow.",
+    "sentence": "He sat in a c____________ silence, thinking about his future.",
     "answers": [
-      "testify"
+      "contemplative"
     ],
     "meaning": [
-      "confirm"
+      "involving prolonged thought"
     ]
   },
   {
-    "sentence": "He seems completely i__________ t_ the criticism he receives.",
+    "sentence": "The artist's r________ of the landscape was both unique and beautiful.",
     "answers": [
-      "indifferent to"
+      "rendering"
     ],
     "meaning": [
-      "not caring about"
+      "interpretation"
     ]
   },
   {
-    "sentence": "Her p________ made her believe the project would definitely fail.",
+    "sentence": "We received an i______ about our new product line this morning.",
     "answers": [
-      "pessimism"
+      "inquiry"
     ],
     "meaning": [
-      "things will go badly"
+      "a request for information"
     ]
   },
   {
-    "sentence": "The prisoners were d_______ of food and water for two days.",
+    "sentence": "The bridge was built to b___ the weight of heavy trucks.",
     "answers": [
-      "deprived"
+      "bear"
     ],
     "meaning": [
-      "taken away"
+      "to carry or support"
     ]
   },
   {
-    "sentence": "The building was d_____ unsafe by the inspectors.",
+    "sentence": "Attention to detail is a h_______ of his work.",
     "answers": [
-      "deemed"
+      "hallmark"
     ],
     "meaning": [
-      "considered"
+      "a distinguishing characteristic"
     ]
   },
   {
-    "sentence": "They overcame great a________ to reach the top of the mountain.",
+    "sentence": "The movie was criticized for its f________ plot and predictable ending.",
     "answers": [
-      "adversity"
+      "formulaic"
     ],
     "meaning": [
-      "difficult situation"
+      "following a fixed pattern"
     ]
   },
   {
-    "sentence": "We must e________ to finish this task by the deadline.",
+    "sentence": "Panic began to t___ h___ as the fire alarm rang.",
     "answers": [
-      "endeavour"
+      "take hold"
     ],
     "meaning": [
-      "serious effort"
+      "to seize or become established"
     ]
   },
   {
-    "sentence": "The museum will e______ a collection of ancient artifacts.",
+    "sentence": "Stop m_______ and speak clearly so everyone can hear you.",
     "answers": [
-      "exhibit"
+      "mumbling"
     ],
     "meaning": [
-      "reveal / display"
+      "speaking unclearly or softly"
     ]
   },
   {
-    "sentence": "It would b______ you to study harder if you want to pass.",
+    "sentence": "He prefers reading p____ rather than complex poetry.",
     "answers": [
-      "behoove"
+      "prose"
     ],
     "meaning": [
-      "in the interests of"
+      "ordinary written language (not poetry)"
+    ]
+  },
+  {
+    "sentence": "There has been a r_________ of interest in vinyl records recently.",
+    "answers": [
+      "resurgence"
+    ],
+    "meaning": [
+      "reappearance or revival"
+    ]
+  },
+  {
+    "sentence": "The s_______ of water in the desert makes survival difficult.",
+    "answers": [
+      "scarcity"
+    ],
+    "meaning": [
+      "shortage"
+    ]
+  },
+  {
+    "sentence": "She enjoys w______ colorful patterns into her rugs.",
+    "answers": [
+      "weaving"
+    ],
+    "meaning": [
+      "the act of making fabric"
+    ]
+  },
+  {
+    "sentence": "The garden is t_______ thanks to the warm weather and regular rain.",
+    "answers": [
+      "thriving"
+    ],
+    "meaning": [
+      "flourishing; growing well"
+    ]
+  },
+  {
+    "sentence": "Explorers often travelled far a_____ to discover new lands.",
+    "answers": [
+      "afield"
+    ],
+    "meaning": [
+      "away from home; at a distance"
+    ]
+  },
+  {
+    "sentence": "Gold and oil are valuable c__________ on the global market.",
+    "answers": [
+      "commodities"
+    ],
+    "meaning": [
+      "goods or products"
+    ]
+  },
+  {
+    "sentence": "We must h______ the power of the wind to generate electricity.",
+    "answers": [
+      "harness"
+    ],
+    "meaning": [
+      "equipment used to control or power something"
+    ]
+  },
+  {
+    "sentence": "Modern w______ often involves cyber attacks as well as physical battles.",
+    "answers": [
+      "warfare"
+    ],
+    "meaning": [
+      "armed conflict"
+    ]
+  },
+  {
+    "sentence": "The child started to t__ o_ his mother's sleeve to get her attention.",
+    "answers": [
+      "tug on"
+    ],
+    "meaning": [
+      "to pull with force"
+    ]
+  },
+  {
+    "sentence": "He switched his car headlights to the d_____ setting to avoid blinding the other driver.",
+    "answers": [
+      "dimmer"
+    ],
+    "meaning": [
+      "a low beam light"
+    ]
+  },
+  {
+    "sentence": "Passing the written exam is t__ s___ p___________ for taking the driving test.",
+    "answers": [
+      "the sole prerequisite"
+    ],
+    "meaning": [
+      "the single required condition"
+    ]
+  },
+  {
+    "sentence": "The difference in price was n_________, so we bought the better one.",
+    "answers": [
+      "negligible"
+    ],
+    "meaning": [
+      "unimportant; very small"
+    ]
+  },
+  {
+    "sentence": "The new safety rules are m_______ by the federal government.",
+    "answers": [
+      "mandated"
+    ],
+    "meaning": [
+      "officially ordered or authorized"
+    ]
+  },
+  {
+    "sentence": "Our food supplies were completely d_______ after the long journey.",
+    "answers": [
+      "depleted"
+    ],
+    "meaning": [
+      "used up; exhausted"
+    ]
+  },
+  {
+    "sentence": "Music and dance are i____________ linked in many cultures.",
+    "answers": [
+      "intrinsically"
+    ],
+    "meaning": [
+      "in an essential or natural way"
+    ]
+  },
+  {
+    "sentence": "The cliff face was h__________ with small caves and tunnels.",
+    "answers": [
+      "honeycombed"
+    ],
+    "meaning": [
+      "filled with many holes"
+    ]
+  },
+  {
+    "sentence": "The eagle has an impressive w_______ of over two meters.",
+    "answers": [
+      "wingspan"
+    ],
+    "meaning": [
+      "the distance from wingtip to wingtip"
+    ]
+  },
+  {
+    "sentence": "The e__________ of energy during the marathon was immense.",
+    "answers": [
+      "expenditure"
+    ],
+    "meaning": [
+      "spending or use of resources"
+    ]
+  },
+  {
+    "sentence": "Exercise helps to speed up your m_________ and burn calories.",
+    "answers": [
+      "metabolism"
+    ],
+    "meaning": [
+      "processes that turn food into energy"
+    ]
+  },
+  {
+    "sentence": "Humans are e__________, meaning they generate their own body heat.",
+    "answers": [
+      "endothermic"
+    ],
+    "meaning": [
+      "able to produce body heat internally"
+    ]
+  },
+  {
+    "sentence": "Reptiles are e__________ and rely on the sun to warm up.",
+    "answers": [
+      "ectothermic"
+    ],
+    "meaning": [
+      "dependent on external heat sources"
+    ]
+  },
+  {
+    "sentence": "Thick fur helps to p______ i_________ against the freezing cold.",
+    "answers": [
+      "provide insulation"
+    ],
+    "meaning": [
+      "prevent loss of heat"
+    ]
+  },
+  {
+    "sentence": "He suffered from a____ pain in his knee after the fall.",
+    "answers": [
+      "acute"
+    ],
+    "meaning": [
+      "very sharp or intense"
+    ]
+  },
+  {
+    "sentence": "Mammals, birds, and fish are all classified as v__________.",
+    "answers": [
+      "vertebrates"
+    ],
+    "meaning": [
+      "animals with backbones"
     ]
   }
- ];
+];
 
     allQuestions.forEach(q => {
       const placeholder = q.sentence.match(/\((.*?)\)/);
